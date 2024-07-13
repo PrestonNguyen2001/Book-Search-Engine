@@ -8,8 +8,9 @@ import { setContext } from "@apollo/client/link/context";
 import { Outlet } from "react-router-dom";
 import Navbar from "./components/Navbar";
 
+// Use environment variable for the GraphQL endpoint
 const httpLink = createHttpLink({
-  uri: "http://localhost:3001/graphql",
+  uri: import.meta.env.VITE_GRAPHQL_ENDPOINT,
 });
 
 const authLink = setContext((_, { headers }) => {
