@@ -1,7 +1,7 @@
 const express = require("express");
 const path = require("path");
 const { ApolloServer } = require("apollo-server-express");
-const connectDB = require("./config/connection");
+const connectDB = require("./config/connection"); // Import connectDB
 const { typeDefs, resolvers } = require("./schemas");
 const { authMiddleware } = require("./utils/auth");
 const routes = require("./routes");
@@ -20,8 +20,8 @@ const startServer = async () => {
     typeDefs,
     resolvers,
     context: authMiddleware,
-    cache: "bounded", 
-    persistedQueries: false, 
+    cache: "bounded",
+    persistedQueries: false,
   });
 
   await server.start();
