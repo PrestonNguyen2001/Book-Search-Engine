@@ -61,8 +61,8 @@ SO THAT I can find interesting books and save my favorites.
 1. Clone the repository:
 
     ```bash
-    git clone https://github.com/yourusername/book-search-engine.git
-    cd book-search-engine
+    git clone https://github.com/PrestonNguyen2001/Book-Search-Engine.git
+    cd Book-Search-Engine
     ```
 
 2. Install server dependencies:

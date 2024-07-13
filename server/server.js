@@ -27,7 +27,8 @@ const startServer = async () => {
     typeDefs,
     resolvers,
     context: authMiddleware,
-    playground: true,
+    cache: "bounded", 
+    persistedQueries: false, 
   });
 
   await server.start();
