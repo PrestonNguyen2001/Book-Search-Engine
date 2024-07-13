@@ -55,7 +55,11 @@ const resolvers = {
           { new: true }
         );
 
-        return updatedUser;
+        if (!updatedUser) {
+          throw new AuthenticationError("Couldn't find user with this id!");
+        }
+
+        return updatedUser; // Ensure this returns the updated user object
       }
       throw new AuthenticationError("You need to be logged in!");
     },

@@ -1,4 +1,3 @@
-
 import {
   ApolloProvider,
   InMemoryCache,
@@ -10,7 +9,7 @@ import { Outlet } from "react-router-dom";
 import Navbar from "./components/Navbar";
 
 const httpLink = createHttpLink({
-  uri: "/graphql",
+  uri: "http://localhost:3001/graphql",
 });
 
 const authLink = setContext((_, { headers }) => {
@@ -23,9 +22,27 @@ const authLink = setContext((_, { headers }) => {
   };
 });
 
+const cache = new InMemoryCache({
+  typePolicies: {
+    User: {
+      fields: {
+        savedBooks: {
+          merge(existing = [], incoming) {
+            const existingBookIds = existing.map((book) => book.bookId);
+            const filteredIncoming = incoming.filter(
+              (book) => !existingBookIds.includes(book.bookId)
+            );
+            return [...existing, ...filteredIncoming];
+          },
+        },
+      },
+    },
+  },
+});
+
 const client = new ApolloClient({
   link: authLink.concat(httpLink),
-  cache: new InMemoryCache(),
+  cache,
 });
 
 function App() {
